@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>潜能定位与专业匹配系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app-container">
+        <div id="view-start" class="view active">
+            <h1>霍兰德潜能定位测试</h1>
+            <p>本测试包含36个日常场景，请凭借第一直觉作答，无需过度思考。</p>
+            <button id="btn-start" class="primary-btn">开始测试</button>
+            <button id="btn-resume" class="secondary-btn hidden">继续上次答题</button>
+        </div>
+
+        <div id="view-quiz" class="view hidden">
+
+            <canvas id="particle-canvas"></canvas>
+
+            <div class="progress-wrapper">
+                <span id="question-counter">1 / 36</span>
+
+                <div class="progress-bar">
+                    <div id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="swipe-container">
+
+                <div id="swipe-card" class="question-card">
+
+                    <div id="swipe-label"></div>
+
+                    <h2 id="question-text">
+                        加载中...
+                    </h2>
+
+                    <div class="gesture-tip">
+                        ← 不符合　↑ 一般般　→ 很符合
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="view-result" class="view hidden">
+            <h2>你的专属潜能面板</h2>
+            <h3 id="personality-code">--</h3>
+            <div class="chart-container">
+                <canvas id="radarChart"></canvas>
+            </div>
+            <div id="result-desc"
+class="result-text"></div>
+            <button id="btn-reset" class="secondary-btn">重新测试 (清除数据)</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
