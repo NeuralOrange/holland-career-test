@@ -292,6 +292,7 @@ function touchMove(e){
 
 function touchEnd(){
 
+    const SWIPE_THRESHOLD = 40;
     const matrix =
         new DOMMatrix(
             getComputedStyle(card).transform
@@ -300,29 +301,39 @@ function touchEnd(){
     const dx = matrix.m41;
     const dy = matrix.m42;
 
-    const duration =
-        Date.now() - startTime;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
 
-    const velocityX =
-        Math.abs(dx) / duration;
+    // 滑动距离太小
+    if(absX < 30 && absY < 30){
+        resetCard();
+        return;
+    }
 
-    const velocityY =
-        Math.abs(dy) / duration;
+    // 判断主方向
+    if(absY > absX * 1.2){
 
-    if(dx > 60 || velocityX > 0.4){
+        // 上滑优先
 
+        if(dy < -SWIPE_THRESHOLD){
+            swipeAnswer(1,"up");
+        }
+        else{
+            resetCard();
+        }
+
+        return;
+    }
+
+    // 左右滑
+
+    if(dx > SWIPE_THRESHOLD){
         swipeAnswer(2,"right");
     }
-    else if(dx < -60 || velocityX > 0.4){
-
+    else if(dx < -SWIPE_THRESHOLD){
         swipeAnswer(0,"left");
     }
-    else if(dy < -60 || velocityY > 0.4){
-
-        swipeAnswer(1,"up");
-    }
     else{
-
         resetCard();
     }
 }
